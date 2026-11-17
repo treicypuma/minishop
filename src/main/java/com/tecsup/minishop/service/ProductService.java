@@ -1,6 +1,7 @@
 package com.tecsup.minishop.service;
 
 import com.tecsup.minishop.model.Product;
+import com.tecsup.minishop.model.ProductRequest;
 import com.tecsup.minishop.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,15 @@ public class ProductService {
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
+    }
+
+    public Product create(ProductRequest request) {
+        Product product = Product.builder()
+                .name(request.name())
+                .price(request.price())
+                .stock(request.stock())
+                .build();
+        return save(product);
     }
 
     public Product save(Product product) {
